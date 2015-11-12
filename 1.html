@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ÖÇÄÜÉç-http://www.zhinengshe.com</title>
+<style>
+*{ margin:0; padding:0;}
+body{ background:#000; text-align:center;}
+canvas{ background:#fff;}
+
+</style>
+<script>
+function d2a(n){
+	return n*Math.PI/180
+}	
+window.onload=function(){
+	var oC=document.getElementById('c1');
+	
+	var gd=oC.getContext('2d');
+	
+	var cx=200,
+		cy=200,
+		r=100;
+		
+	function drawArc(start,end,r,color){
+		start-=90;
+		end-=90;
+		
+		gd.beginPath();
+		gd.strokeStyle=color;
+		gd.lineWidth=20;
+		gd.arc(cx,cy,r,d2a(start),d2a(end),false);
+		gd.stroke();
+	}
+	
+	setInterval(function(){
+		gd.clearRect(0,0,oC.width,oC.height);
+		
+		var oDate=new Date();
+		var h=oDate.getHours();
+		var m=oDate.getMinutes();
+		var s=oDate.getSeconds();
+		var ms=oDate.getMilliseconds();
+		
+		
+		drawArc(0,s*6+ms/1000*6,120,'#f60');
+		drawArc(0,m*6+s/60*6,100,'#399');
+		drawArc(0,h*30+m/60*30,80,'#282828');
+		
+		//»­ÎÄ×Ö
+		gd.fillStyle='#ff0';
+		gd.font='30px Î¢ÈíÑÅºÚ';
+		var str=h+':'+m+':'+s;
+		
+		var w=gd.measureText(str).width;
+		
+		gd.fillText(str,cx-w/2,cy+15);
+	},16);
+	
+	
+	//=======================
+	var oBtn=document.getElementById('btn1');
+	oBtn.onclick=function(){
+		var str=oC.toDataURL('asdf/gif');	
+		
+		window.open(str);
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="button" value="µ¼³öÍ¼Æ¬" id="btn1"><br>
+<img src="" id="img1">
+<canvas id="c1" width="400" height="400"></canvas>
+
+</body>
+</html>
